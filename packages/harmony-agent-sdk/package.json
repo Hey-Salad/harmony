@@ -1,0 +1,17 @@
+{
+  "name": "@heysalad/harmony-agent-sdk",
+  "version": "0.1.0",
+  "description": "SDK for tracking AI agent runtime in HeySalad Harmony",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["harmony", "agent", "sdk", "adk", "mcp", "tracking"],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

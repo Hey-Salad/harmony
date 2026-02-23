@@ -5,9 +5,8 @@ compatibility_flags = ["nodejs_compat"]
 
 [env.production]
 name = "heysalad-harmony-api"
-route = "harmony-api.heysalad-o.workers.dev/*"
 
-[[d1_databases]]
+[[env.production.d1_databases]]
 binding = "DB"
 database_name = "harmony-db"
 database_id = "443a9bba-1804-4bdd-85e9-0de19b334c6f"
@@ -16,3 +15,8 @@ database_id = "443a9bba-1804-4bdd-85e9-0de19b334c6f"
 # HEYSALAD_OAUTH_CLIENT_ID
 # HEYSALAD_OAUTH_CLIENT_SECRET
 # OPENAI_API_KEY
+# GOOGLE_API_KEY
+# STRIPE_PUBLISHABLE_KEY
+# STRIPE_SECRET_KEY
+# TAVILY_API_KEY
+# BROWSERLESS_API_KEY

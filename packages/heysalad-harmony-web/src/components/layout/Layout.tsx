@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  Package, 
-  Users, 
-  FileText, 
+import {
+  LayoutDashboard,
+  Package,
+  Users,
+  FileText,
   Settings,
   Menu,
   X,
@@ -25,6 +25,7 @@ import {
   Mic,
   BookOpen,
   Briefcase,
+  Bot,
 } from 'lucide-react';
 import { useAuth } from '../../App';
 import { auth } from '../../config/firebase';
@@ -76,6 +77,7 @@ const Layout = () => {
       return {
         main: [
           ...universalItems,
+          { icon: Bot, label: 'Workforce', href: '/workforce' },
           { icon: Package, label: 'Packages', href: '/packages' },
           { icon: Users, label: 'Employees', href: '/employees' },
           { icon: Briefcase, label: 'Recruitment', href: '/recruitment' },
@@ -90,6 +92,7 @@ const Layout = () => {
       return {
         main: [
           ...universalItems,
+          { icon: Bot, label: 'Workforce', href: '/workforce' },
           { icon: Users, label: 'Team Overview', href: '/team' },
           { icon: AlertTriangle, label: 'Safety', href: '/safety' },
           { icon: MapPin, label: 'Locations', href: '/locations' },

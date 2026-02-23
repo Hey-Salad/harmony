@@ -35,6 +35,12 @@ import OpsApprovals from './pages/operations-manager/Approvals';
 import Procurement from './pages/operations-manager/Procurement';
 import OpsFinance from './pages/operations-manager/Finance';
 import OpsRecruitment from './pages/operations-manager/Recruitment';
+import Workforce from './pages/hr-manager/Workforce';
+import AgentDetail from './components/workers/AgentDetail';
+import HumanDetail from './components/workers/HumanDetail';
+import UniverseDashboard from './pages/dashboard/UniverseDashboard';
+import UniverseStandalone from './pages/UniverseStandalone';
+import ErrorBoundary from './components/ErrorBoundary';
 
 interface AppAuthContextType {
   currentRole: Role;
@@ -72,15 +78,8 @@ function AppContent() {
   const [currentRole, setCurrentRole] = React.useState<Role>('HR Manager');
 
   const DashboardContent = () => {
-    if (currentRole === 'HR Manager') {
-      return <HRManagerDashboard />;
-    }
-
-    if (currentRole === 'Operations Manager') {
-      return <OperationsManagerDashboard />;
-    }
-
-    return <WarehouseStaffDashboard />;
+    // Universe is now the default dashboard for all roles
+    return <UniverseDashboard />;
   };
 
   if (isLoading) {
@@ -97,10 +96,8 @@ function AppContent() {
   return (
     <AppAuthContext.Provider value={{ currentRole, setCurrentRole }}>
       <Routes>
-        <Route
-          path="/"
-          element={user ? <Navigate to="/dashboard" /> : <LandingPage />}
-        />
+        {/* Public routes */}
+        <Route path="/" element={user ? <Navigate to="/dashboard" /> : <LandingPage />} />
         <Route path="/login" element={user ? <Navigate to="/dashboard" /> : <LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/demo" element={<DemoPage />} />
@@ -121,6 +118,16 @@ function AppContent() {
             {/* Warehouse Staff */}
             <Route path="/my-documents" element={<MyDocuments />} />
             <Route path="/my-schedule" element={<MySchedule />} />
+
+            {/* Workforce (unified humans + AI agents) */}
+            <Route path="/workforce" element={<Workforce />} />
+            <Route path="/workforce/agent/:id" element={<AgentDetail />} />
+            <Route path="/workforce/human/:id" element={<HumanDetail />} />
+
+            {/* Legacy dashboards (accessible via direct routes) */}
+            <Route path="/dashboard/hr" element={<HRManagerDashboard />} />
+            <Route path="/dashboard/ops" element={<OperationsManagerDashboard />} />
+            <Route path="/dashboard/staff" element={<WarehouseStaffDashboard />} />
 
             {/* HR Manager */}
             <Route path="/packages" element={<Packages />} />
@@ -161,11 +168,13 @@ function AppContent() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <Router>
+          <AppContent />
+        </Router>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

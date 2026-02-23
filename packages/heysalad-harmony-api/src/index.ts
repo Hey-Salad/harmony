@@ -5,6 +5,9 @@ import { companiesRoutes } from './routes/companies';
 import { employeesRoutes } from './routes/employees';
 import { documentsRoutes } from './routes/documents';
 import { authRoutes } from './routes/auth';
+import { workersRoutes } from './routes/workers';
+import { sessionsRoutes } from './routes/sessions';
+import { analyticsRoutes } from './routes/analytics';
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -29,6 +32,9 @@ app.route('/api/auth', authRoutes);
 app.route('/api/companies', companiesRoutes);
 app.route('/api/employees', employeesRoutes);
 app.route('/api/documents', documentsRoutes);
+app.route('/api/workers', workersRoutes);
+app.route('/api/sessions', sessionsRoutes);
+app.route('/api/analytics', analyticsRoutes);
 
 // 404 handler
 app.notFound((c) => {
